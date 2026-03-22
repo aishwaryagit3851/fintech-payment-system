@@ -1,5 +1,6 @@
 package com.fintech.finance_platform_aish.dto;
 
+import com.fintech.finance_platform_aish.entity.TransactionType;
 import lombok.Data;
 import java.math.BigDecimal;
 
@@ -7,6 +8,6 @@ import java.math.BigDecimal;
 public class CardPaymentRequestDTO {
     private String cardNumber;
     private BigDecimal amount;
-    private String type; // PAY or TRANSFER
+    private TransactionType type; // PAY or TRANSFER
     private Long receiverUserId; // only for transfer
 }

@@ -7,6 +7,7 @@ import com.fintech.finance_platform_aish.dto.TransactionRequestDTO;
 import com.fintech.finance_platform_aish.dto.TransactionResponseDTO;
 import com.fintech.finance_platform_aish.entity.Transaction;
 import com.fintech.finance_platform_aish.service.TransactionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
@@ -30,7 +32,8 @@ public class TransactionController {
         return transactionService.transferMoney(
                 request.getFromAccountId(),
                 request.getToAccountId(),
-                request.getAmount()
+                request.getAmount(),
+                request.getIdempotencyKey()
         );
     }
 
@@ -48,7 +51,8 @@ public class TransactionController {
 
         return transactionService.deposit(
                 request.getAccountId(),
-                request.getAmount()
+                request.getAmount(),
+                request.getIdempotencyKey()
         );
     }
 
@@ -57,7 +61,8 @@ public class TransactionController {
 
         return transactionService.withdraw(
                 request.getAccountId(),
-                request.getAmount()
+                request.getAmount(),
+                request.getIdempotencyKey()
         );
     }
 

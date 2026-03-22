@@ -20,5 +20,7 @@ public class TransactionRequestDTO {
     @Positive
     private BigDecimal amount;
 
+    private String idempotencyKey;
+
 
 }

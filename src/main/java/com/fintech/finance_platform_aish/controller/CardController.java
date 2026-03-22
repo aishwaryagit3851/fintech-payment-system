@@ -5,6 +5,7 @@ import com.fintech.finance_platform_aish.dto.CreateCardRequestDTO;
 import com.fintech.finance_platform_aish.entity.User;
 import com.fintech.finance_platform_aish.repository.UserRepository;
 import com.fintech.finance_platform_aish.service.CardService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/cards")
 public class CardController {

@@ -20,9 +20,18 @@ public class Transaction {
 
     private BigDecimal amount;
 
-    private String transactionType;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
+
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus transactionStatus;
 
     private LocalDateTime timestamp;
+
+    private String referenceId;
+
+    @Column(unique = true)
+    private String idempotencyKey;
 
     @ManyToOne
     @JoinColumn(name = "from_account_id")
@@ -34,13 +43,15 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(BigDecimal amount, String transactionType,
-                       LocalDateTime timestamp, Account fromAccount, Account toAccount) {
+    public Transaction(BigDecimal
+                               amount, TransactionType transactionType,
+                       LocalDateTime timestamp, Account fromAccount, Account toAccount,TransactionStatus transactionStatus) {
         this.amount = amount;
         this.transactionType = transactionType;
         this.timestamp = timestamp;
         this.fromAccount = fromAccount;
         this.toAccount = toAccount;
+        this.transactionStatus=transactionStatus;
     }
 
     @Override

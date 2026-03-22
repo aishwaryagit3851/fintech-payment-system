@@ -1,5 +1,6 @@
 package com.fintech.finance_platform_aish.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
@@ -15,6 +16,9 @@ public class DepositWithdrawRequestDTO {
     @NotNull(message = "Amount is required")
     @Positive(message = "Amount must be greater than 0")
     private BigDecimal amount;
+
+    @Column(unique = true)
+    private String IdempotencyKey;
 
     public Long getAccountId() {
         return accountId;
